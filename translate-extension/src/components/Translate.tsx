@@ -35,7 +35,7 @@ const Translator = () => {
         if (!selectedText) return;
 
         try {
-          const res = await fetch('http://localhost:5000/translate', {
+          const res = await fetch('https://translator-api-6igq.onrender.com/translate', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
