@@ -1,23 +1,26 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const Translator = () => {
-  const [translated, setTranslated] = useState('');
-  const [language, setLanguage] = useState('ml');
+  const [translated, setTranslated] = useState("");
+  const [language, setLanguage] = useState("ml");
 
   const handleTranslate = async () => {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const [tab] = await chrome.tabs.query({
+      active: true,
+      currentWindow: true,
+    });
 
     if (!tab?.id || !tab.url) {
-      console.error('Invalid tab or missing tab ID/URL');
+      console.error("Invalid tab or missing tab ID/URL");
       return;
     }
 
     if (
-      tab.url.startsWith('chrome://') ||
-      tab.url.startsWith('chrome-extension://')
+      tab.url.startsWith("chrome://") ||
+      tab.url.startsWith("chrome-extension://")
     ) {
       alert(
-        '⚠️ This extension cannot run on internal Chrome pages like chrome://extensions.\nPlease try it on a regular website.'
+        "⚠️ This extension cannot run on internal Chrome pages like chrome://extensions.\nPlease try it on a regular website."
       );
       return;
     }
@@ -27,30 +30,36 @@ const Translator = () => {
         target: { tabId: tab.id },
         func: () => {
           const selection = window.getSelection();
-          return selection ? selection.toString() : '';
+          return selection ? selection.toString() : "";
         },
       },
       async (results) => {
-        const selectedText = results?.[0]?.result || '';
-        if (!selectedText) return;
+        const selectedText = results?.[0]?.result || "";
+
+        if (!selectedText) {
+          setTranslated("⚠️ No text selected.");
+          return;
+        }
+
+        const truncatedText = selectedText.slice(0, 500);
 
         try {
-          const res = await fetch('https://translator-api-6igq.onrender.com/translate', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              text: selectedText,
-              targetLang: language,
-            }),
-          });
+          const res = await fetch(
+            `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
+              truncatedText
+            )}&langpair=en|${language}`
+          );
 
           const data = await res.json();
-          setTranslated(data.translatedText);
+
+          if (data?.responseData?.translatedText) {
+            setTranslated(data.responseData.translatedText);
+          } else {
+            setTranslated("⚠️ Translation failed or no result.");
+          }
         } catch (err) {
-          console.error('Translation failed:', err);
-          setTranslated('⚠️ Translation error. Please try again.');
+          console.error("Translation failed:", err);
+          setTranslated("⚠️ Network error. Please try again.");
         }
       }
     );
@@ -58,7 +67,7 @@ const Translator = () => {
 
   return (
     <div>
-      <div style={{ marginBottom: '1rem' }}>
+      <div style={{ marginBottom: "1rem" }}>
         <label>Choose Language</label>
         <select
           value={language}
@@ -76,11 +85,11 @@ const Translator = () => {
         Translate Selected Text
       </button>
 
-      <div style={{ marginTop: '1rem' }}>
+      <div style={{ marginTop: "1rem" }}>
         <label>Translation:</label>
-        <div className="output-box" style={{ minHeight: '50px' }}>
+        <div className="output-box" style={{ minHeight: "50px" }}>
           {translated || (
-            <span style={{ color: 'gray' }}>No text translated yet.</span>
+            <span style={{ color: "gray" }}>No text translated yet.</span>
           )}
         </div>
       </div>

@@ -27,7 +27,7 @@
 /* Global styles */
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
@@ -35,45 +35,23 @@ body {
 
 /* App container */
 .container {
-  width: 340px!important;
-  min-height: 320px;
-  margin: 20px auto;
+  width: 340px;
+  height: 100%;
   background-color: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
-  border: 1px solid var(--border-color);
   transition: background-color 0.3s, color 0.3s;
+  box-sizing: border-box;
 }
-
-/* Tabs */
-.tabs {
+.container .box-inner {
   display: flex;
-  border-bottom: 2px solid var(--border-color);
-  margin-bottom: 1rem;
+  justify-content: space-between;
+  align-items: center;
 }
-
-.tab-button {
-  flex: 1;
-  padding: 10px;
+.box-inner h2 {
+  font-size: 16px;
   font-weight: 600;
-  border: none;
-  background: none;
-  color: var(--text-color);
-  cursor: pointer;
-  border-bottom: 3px solid transparent;
-  transition: border-color 0.2s, color 0.2s;
+  margin: 0;
 }
-
-.tab-button:hover {
-  color: var(--accent-color);
-}
-
-.tab-button.active {
-  border-color: var(--accent-color);
-  color: var(--accent-color);
-}
-
 /* Buttons */
 button {
   background-color: var(--button-bg);
@@ -88,10 +66,27 @@ button {
 
 button:hover {
   background-color: var(--accent-hover);
-  color: white!important;
+  color: white !important;
 }
 
-/* Select, Output */
+/* Icon button for theme toggle */
+button[aria-label="Toggle theme"] {
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-color);
+}
+button span {
+  display: inline-block;
+
+  transition: transform 0.3s ease;
+}
+.translator-wrapper{
+   margin-top: 1rem;
+}
+
+/* Select input and output box */
 select,
 .output-box {
   width: 100%;
@@ -101,7 +96,6 @@ select,
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 14px;
-  transition: background-color 0.3s, color 0.3s;
   margin-top: 5px;
 }
 
@@ -112,7 +106,7 @@ label {
   display: block;
 }
 
-/* Section spacing */
+/* Sections */
 .section {
   margin-bottom: 1.2rem;
 }
@@ -124,14 +118,14 @@ label {
   margin-bottom: 0.8rem;
 }
 
-/* Output Box */
+/* Output box specific */
 .output-box {
   min-height: 60px;
   white-space: pre-wrap;
   margin-top: 0.5rem;
 }
 
-/* Transition for all */
+/* Smooth transitions */
 * {
   box-sizing: border-box;
   transition: all 0.25s ease;
