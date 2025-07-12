@@ -1,0 +1,138 @@
+/* Light Theme (default) */
+:root {
+  --bg-color: #ffffff;
+  --card-bg: #f9fafb;
+  --text-color: #1f2937;
+  --border-color: #e5e7eb;
+  --accent-color: #3b82f6;
+  --accent-hover: #2563eb;
+  --button-bg: #3b82f6;
+  --button-text: #ffffff;
+  --input-bg: #ffffff;
+}
+
+/* Dark Theme */
+.dark {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-color: #f8fafc;
+  --border-color: #334155;
+  --accent-color: #60a5fa;
+  --accent-hover: #3b82f6;
+  --button-bg: #60a5fa;
+  --button-text: #0f172a;
+  --input-bg: #1e293b;
+}
+
+/* Global styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* App container */
+.container {
+  width: 340px!important;
+  min-height: 320px;
+  margin: 20px auto;
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px;
+  font-weight: 600;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.tab-button:hover {
+  color: var(--accent-color);
+}
+
+.tab-button.active {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* Buttons */
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+  color: white!important;
+}
+
+/* Select, Output */
+select,
+.output-box {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+  margin-top: 5px;
+}
+
+/* Labels */
+label {
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Section spacing */
+.section {
+  margin-bottom: 1.2rem;
+}
+
+/* Headings */
+.heading {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+/* Output Box */
+.output-box {
+  min-height: 60px;
+  white-space: pre-wrap;
+  margin-top: 0.5rem;
+}
+
+/* Transition for all */
+* {
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
